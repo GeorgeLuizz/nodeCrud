@@ -1,0 +1,32 @@
+POST http://localhost:3000/timesBR
+content-type: application/json
+
+{
+    "nome": "Palmeiras",
+    "idade": "102",
+    "cores": "verde",
+    "numTitulos": "15"
+}
+
+###
+
+GET http://localhost:3000/timesBR
+
+###
+
+GET http://localhost:3000/timesBR/Flamengo
+
+###
+
+PUT  http://localhost:3000/timesBR/Palmeiras
+content-type: application/json
+
+{
+    "idade": "105",
+    "cores": "verde e branco",
+    "numTitulos": "20"
+}
+
+###
+
+DELETE http://localhost:3000/timesBR/Corinthians
