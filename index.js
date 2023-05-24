@@ -1,4 +1,7 @@
 const express = require('express')
+const sequelize = require('./db')
+const Time = require('./models/time')
+
 
 const app = express()
 
@@ -6,26 +9,33 @@ app.use(express.json())
 
 const timesBR = []
 
-app.post('/timesBR', (req, res) => {
-    const { nome, idade, cores, numTitulos } = req.body
-    const time = {
-        nome,
-        idade,
-        cores,
-        numTitulos
+app.post('/timesBR', async (req, res) => {
+    try {
+        const { nome, idade, cores, numTitulos } = req.body
+        const time = await Time.create({ nome, idade, cores, numTitulos })
+        return res.json(time)
+    } catch (error) {
+        console.error('Erro ao criar time:', error);
+        return res.status(500).json({ error: 'Erro ao criar time' });
     }
-    timesBR.push(time)
-    return res.json(time)
 })
 
-app.get('/timesBR', (req, res) => {
-    return res.json(timesBR)
+app.get('/timesBR', async (req, res) => {
+
+        const times = await Time.findAll()
+        return res.json(times)
+
 })
 
-app.get('/timesBR/:nome', (req, res) => {
-    const { nome } = req.params
-    const time = timesBR.find(time => time.nome === nome)
-    return res.json(time)
+app.get('/timesBR/:nome', async (req, res) => {
+    try {
+        const { nome } = req.params
+         const time = await Time.findOne({ where: { nome }})
+    } catch (error) {
+        
+    }
+    
+
 })
 //utilização de chaves nas constantes??
 app.put('/timesBR/:nome', (req, res) => {

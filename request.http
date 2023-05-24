@@ -2,10 +2,10 @@ POST http://localhost:3000/timesBR
 content-type: application/json
 
 {
-    "nome": "Palmeiras",
-    "idade": "102",
-    "cores": "verde",
-    "numTitulos": "15"
+    "nome": "Corinthians",
+    "idade": "105",
+    "cores": "preto e branco",
+    "numTitulos": "10"
 }
 
 ###
@@ -14,7 +14,7 @@ GET http://localhost:3000/timesBR
 
 ###
 
-GET http://localhost:3000/timesBR/Flamengo
+GET http://localhost:3000/timesBR/Palmeiras
 
 ###
 
