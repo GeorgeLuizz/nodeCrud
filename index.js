@@ -22,10 +22,8 @@ app.post('/timesBR', async (req, res) => {
 })
 
 app.get('/timesBR', async (req, res) => {
-
         const times = await Time.findAll()
         return res.json(times)
-
 })
 
 app.get('/timesBR/:nome', async (req, res) => {
