@@ -32,20 +32,8 @@ document.getElementById('btnlistTimes').addEventListener('click', async() => {
     try {
         const response = await fetch('/timesBR')
         const times = await response.json()
-        const jsonToStr = JSON.stringify(times, null, 2)
+        const jsonToStr = JSON.stringify(times, null, 1)
         listaTimes.innerHTML = `<pre>${jsonToStr}</pre>`
-        /*
-        times.forEach(time => {
-            const timeElement = document.createElement('p')
-            timeElement.textContent = `
-            Nome: ${time.nome}, 
-            Idade: ${time.idade}, 
-            Cores: ${time.cores}, 
-            Número de Títulos: ${time.numTitulos}
-            `
-            listaTimes.appendChild(timeElement)
-        })
-        */
     } catch (error) {
         console.error(error)
     }
