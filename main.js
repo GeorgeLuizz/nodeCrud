@@ -1,18 +1,17 @@
-const form = document.getElementById('timeForm');
-const timesList = document.getElementById('timesList');
+const form = document.getElementById('timeForm')
 
 form.addEventListener('submit', async (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    const nomeInput = document.getElementById('nome');
-    const idadeInput = document.getElementById('idade');
-    const coresInput = document.getElementById('cores');
-    const numTitulosInput = document.getElementById('numTitulos');
+    const nomeInput = document.getElementById('nome')
+    const idadeInput = document.getElementById('idade')
+    const coresInput = document.getElementById('cores')
+    const numTitulosInput = document.getElementById('numTitulos')
 
-    const nome = nomeInput.value;
-    const idade = idadeInput.value;
-    const cores = coresInput.value;
-    const numTitulos = numTitulosInput.value;
+    const nome = nomeInput.value
+    const idade = idadeInput.value
+    const cores = coresInput.value
+    const numTitulos = numTitulosInput.value
 
     try {
         const response = await fetch('/timesBR', {
@@ -21,32 +20,33 @@ form.addEventListener('submit', async (event) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ nome, idade, cores, numTitulos })
-        });
-
-        if (!response.ok) {
-            throw new Error('Erro ao adicionar time');
-        }
-
+        })
     } catch (error) {
-        console.error('Erro ao adicionar time:', error);
+        console.error(error)
     }
 });
-/*
-async function fetchTimes() {
+
+const listaTimes = document.getElementById('listaTimes')
+
+document.getElementById('btnlistTimes').addEventListener('click', async() => {
     try {
-        const response = await fetch('/timesBR');
-
-        if (!response.ok) {
-            throw new Error('Erro ao buscar times');
-        }
-
-        const times = await response.json();
-        console.log(times)
-
+        const response = await fetch('/timesBR')
+        const times = await response.json()
+        const jsonToStr = JSON.stringify(times, null, 2)
+        listaTimes.innerHTML = `<pre>${jsonToStr}</pre>`
+        /*
+        times.forEach(time => {
+            const timeElement = document.createElement('p')
+            timeElement.textContent = `
+            Nome: ${time.nome}, 
+            Idade: ${time.idade}, 
+            Cores: ${time.cores}, 
+            Número de Títulos: ${time.numTitulos}
+            `
+            listaTimes.appendChild(timeElement)
+        })
+        */
     } catch (error) {
-        console.error('Erro ao buscar times:', error);
+        console.error(error)
     }
-}
-
-fetchTimes();
-*/
+})
