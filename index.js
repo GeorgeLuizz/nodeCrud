@@ -5,6 +5,7 @@ const Time = require('./models/time')
 
 const app = express()
 
+app.use(express.static(__dirname))
 app.use(express.json())
 
 const timesBR = []
@@ -30,7 +31,8 @@ app.get('/timesBR', async (req, res) => {
 app.get('/timesBR/:nome', async (req, res) => {
     try {
         const { nome } = req.params
-         const time = await Time.findOne({ where: { nome }})
+        const time = await Time.findOne({ where: { nome }})
+        return res.json(time)
     } catch (error) {
         
     }
